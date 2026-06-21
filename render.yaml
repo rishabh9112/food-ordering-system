@@ -33,17 +33,12 @@ services:
   - type: web
     name: food-ordering-system-frontend
     runtime: static
-    region: oregon
     buildCommand: npm run build
     staticPublishPath: build
     rootDir: frontend
     envVars:
       - key: REACT_APP_API_URL
-        fromService:
-          name: food-ordering-system-backend
-          type: web
-          property: url
-        value: ${fromService.url}/api
+        value: ${FOOD_ORDERING_SYSTEM_BACKEND_URL}/api
     routes:
       - type: rewrite
         source: /*
