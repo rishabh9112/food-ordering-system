@@ -30,11 +30,12 @@ services:
         value: 8080
 
   # 2. Frontend Static Site (React Single Page Application)
-  - type: static
+  - type: web
     name: food-ordering-system-frontend
+    runtime: static
     region: oregon
     buildCommand: npm run build
-    publishPath: build
+    staticPublishPath: build
     rootDir: frontend
     envVars:
       - key: REACT_APP_API_URL
