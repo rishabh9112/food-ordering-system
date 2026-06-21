@@ -9,17 +9,17 @@ services:
     plan: free
     envVars:
       - key: DB_URL
-        sync: false # User will input their PostgreSQL connection URL (e.g. Neon)
+        sync: false # Set to your PostgreSQL connection URL (e.g. Neon)
       - key: DB_USERNAME
         sync: false
       - key: DB_PASSWORD
         sync: false
       - key: JWT_SECRET
-        generateValue: true # Generates a random secure token key automatically
+        generateValue: true # Auto-generates a secure random token
       - key: RAZORPAY_KEY_ID
-        sync: false # User's Razorpay Key ID
+        sync: false
       - key: RAZORPAY_KEY_SECRET
-        sync: false # User's Razorpay Key Secret
+        sync: false
       - key: CLOUDINARY_CLOUD_NAME
         sync: false
       - key: CLOUDINARY_API_KEY
@@ -38,7 +38,7 @@ services:
     rootDir: frontend
     envVars:
       - key: REACT_APP_API_URL
-        value: ${FOOD_ORDERING_SYSTEM_BACKEND_URL}/api
+        value: https://food-ordering-system-backend-2bd0.onrender.com/api
     routes:
       - type: rewrite
         source: /*
