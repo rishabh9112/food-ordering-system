@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (authData) => {
+    console.log('JWT Token on login:', authData.token);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('role', authData.role);
     localStorage.setItem('email', authData.email);
