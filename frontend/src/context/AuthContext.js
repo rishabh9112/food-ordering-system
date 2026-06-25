@@ -20,10 +20,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = (authData) => {
     console.log('JWT Token on login:', authData.token);
+    // Primary storage — used by all auth logic
     localStorage.setItem('token', authData.token);
     localStorage.setItem('role', authData.role);
     localStorage.setItem('email', authData.email);
     localStorage.setItem('name', authData.name);
+    // Mirror token to sessionStorage for visibility (current tab only)
+    sessionStorage.setItem('token', authData.token);
     setUser({
       token: authData.token,
       role: authData.role,
@@ -34,6 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.clear();
+    sessionStorage.clear(); // also clear the mirror
     setUser(null);
   };
 
