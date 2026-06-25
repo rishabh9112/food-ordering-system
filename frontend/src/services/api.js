@@ -2,7 +2,11 @@ import axios from 'axios';
 
 let apiURL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 if (apiURL && !apiURL.startsWith('http://') && !apiURL.startsWith('https://')) {
-  apiURL = `https://${apiURL}/api`;
+  if (!apiURL.includes('.')) {
+    apiURL = `https://${apiURL}.onrender.com/api`;
+  } else {
+    apiURL = `https://${apiURL}/api`;
+  }
 }
 
 const api = axios.create({
