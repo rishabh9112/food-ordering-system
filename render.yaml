@@ -30,15 +30,21 @@ services:
         value: 8080
 
   # 2. Frontend Static Site (React Single Page Application)
+  # NOTE: rootDir is set to 'frontend', so ALL paths below are relative to 'frontend/'
   - type: web
     name: food-ordering-system-frontend
     runtime: static
-    buildCommand: npm run build
-    staticPublishPath: build
     rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build           # relative to rootDir (frontend/build)
     envVars:
       - key: REACT_APP_API_URL
-        value: https://food-ordering-system-backend-2bd0.onrender.com/api
+        fromService:
+          type: web
+          name: food-ordering-system-backend
+          property: host
+      - key: GENERATE_SOURCEMAP
+        value: false                   # speeds up build, saves memory on free plan
     routes:
       - type: rewrite
         source: /*
